@@ -1,0 +1,33 @@
+{
+  "Shopee": {
+    "Eletrônicos": {
+      "Fones de Ouvido": {
+        "keywords": ["fone", "fones", "fone de ouvido", "headphone", "auricular", "earphone", "bluetooth"],
+        "links": [
+          "https://s.shopee.com.br/10qmEpwzxf",
+          "https://s.shopee.com.br/8UwnAiNci2",
+          "https://s.shopee.com.br/5pw1zqoUts",
+          "https://s.shopee.com.br/AA519sEmoK",
+          "https://s.shopee.com.br/6VBin9oL71",
+          "https://s.shopee.com.br/AA519z7cwm"
+        ]
+      },
+      "Carregadores Portáteis": {
+        "keywords": ["carregador", "powerbank", "bateria externa", "carregador portátil"],
+        "links": [
+          "https://s.shopee.com.br/8pZdZaOgrf",
+          "https://s.shopee.com.br/1Vn2q9OveU",
+          "https://s.shopee.com.br/20jJR5ZowM"
+        ]
+      }
+    },
+    "Moda Masculina": {
+      "Camisetas": {
+        "keywords": ["camiseta", "blusa", "camisa", "camisetas masculinas"],
+        "links": [
+          "https://shopee.com.br/affiliado-camiseta1"
+        ]
+      }
+    }
+  }
+}

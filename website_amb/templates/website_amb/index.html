@@ -1,0 +1,55 @@
+{% extends 'website_amb/base.html' %}
+
+{% block conteudo_principal %}
+
+  <style>
+    .tela-centralizada {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+  </style>
+
+  <main class="tela-centralizada">
+
+    <!-- Título -->
+    <h1 class="fw-bold text-dark mb-3" style="font-size: 2.5rem;">
+      Achei <span class="text-primary">Mais Barato</span>
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="lead text-muted mb-4" style="max-width: 520px;">
+      Encontre os melhores preços em milhares de produtos da <span class="text-danger">Shopee</span>.
+    </p>
+
+    <!-- Formulário de pesquisa -->
+    <form method="get" action="{% url 'resultado' %}" class="w-100" style="max-width: 600px;" aria-label="Pesquisar produtos">
+      <div class="input-group shadow-sm">
+
+        <input
+          type="search"
+          name="q"
+          class="form-control form-control-lg border-end-0"
+          placeholder="Digite o que está procurando..."
+          value="{{ request.GET.q }}"
+          aria-label="Campo de pesquisa"
+          required
+        >
+
+        <button class="btn btn-lg btn-primary ml-1" type="submit">Buscar</button>
+
+      </div>
+    </form>
+
+    <!-- Aviso -->
+    <small class="form-text text-muted mt-3">
+      Versão Beta — melhorias em andamento. Por enquanto, integrado apenas à Shopee.
+    </small>
+
+  </main>
+
+{% endblock %}
