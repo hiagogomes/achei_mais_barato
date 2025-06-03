@@ -27,7 +27,7 @@
     </p>
 
     <!-- Formulário de pesquisa -->
-    <form method="get" action="{% url 'resultado' %}" class="w-100" style="max-width: 600px;" aria-label="Pesquisar produtos">
+    <form id="searchForm" method="get" action="{% url 'resultado' %}" class="w-100" style="max-width: 600px;" aria-label="Pesquisar produtos">
       <div class="input-group shadow-sm">
 
         <input
@@ -46,7 +46,7 @@
     </form>
 
     <!-- Aviso -->
-    <small class="form-text text-muted mt-3">
+    <small class="form-text text-muted mt-2">
       Versão Beta — melhorias em andamento. Por enquanto, integrado apenas à Shopee.
     </small>
 
