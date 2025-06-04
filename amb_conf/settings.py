@@ -32,19 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Broker de mensagens: Redis
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-
-# Pode adicionar um tempo limite para tarefas pendentes (opcional)
-CELERY_TASK_TIME_LIMIT = 300  # segundos
-
-# Local onde o resultado das tasks será salvo (opcional)
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
-# Codificação padrão
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-
 
 # Application definition
 
