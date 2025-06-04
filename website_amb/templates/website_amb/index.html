@@ -27,14 +27,14 @@
     </p>
 
     <!-- Formulário de pesquisa -->
-    <form id="searchForm" method="get" action="{% url 'resultado' %}" class="w-100" style="max-width: 600px;" aria-label="Pesquisar produtos">
+    <form id="form-busca" method="get" action="{% url 'resultado' %}" class="w-100" style="max-width: 600px;" aria-label="Pesquisar produtos">
       <div class="input-group shadow-sm">
 
         <input
           type="search"
           name="q"
           class="form-control form-control-lg border-end-0"
-          placeholder="Digite o que está procurando..."
+          placeholder="O que você procura?"
           value="{{ request.GET.q }}"
           aria-label="Campo de pesquisa"
           required
@@ -53,3 +53,4 @@
   </main>
 
 {% endblock %}
+

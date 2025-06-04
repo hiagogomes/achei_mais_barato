@@ -43,7 +43,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website_amb',
+    'django-q',
 ]
+
+# Configurações do Django-Q
+Q_CLUSTER = {
+    'name': 'acheimaisbarato',
+    'workers': 4,
+    'retry': 120,
+    'timeout': 60,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default',  # usa o banco de dados padrão do Django
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
