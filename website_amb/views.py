@@ -5,6 +5,7 @@ import hashlib
 import requests
 from django.shortcuts import render
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Obtém as variáveis sensíveis do arquivo de configurações
 APP_ID = settings.SHOPEE_APP_ID  # ID do aplicativo registrado na API da Shopee
@@ -74,13 +75,7 @@ def resultado(request):
     """
     View da página de resultados.
     Faz a busca na API da Shopee com o termo digitado, limpa o termo se necessário,
-    envia a requisição e processa os produtos retornados.
-
-    Parâmetros:
-        request (HttpRequest): Requisição com parâmetro "q" no GET.
-
-    Retorna:
-        HttpResponse: Página com os cards dos produtos encontrados.
+    envia a requisição e processa os produtos retornados, com paginação.
     """
     # Termo original digitado pelo usuário
     termo_original = request.GET.get("q", "").strip().lower()
@@ -95,8 +90,8 @@ def resultado(request):
     if not termo:
         return render(request, "website_amb/resultado.html", {"produtos": []})
 
-    # Página inicial da API (padrão = 1)
-    page = 1
+    # Página inicial da API (sempre começa em 1 para pegar os primeiros 50 produtos)
+    page_api = 1
 
     # Estrutura do payload da requisição GraphQL
     payload_dict = {
@@ -122,7 +117,7 @@ def resultado(request):
         """,
         "operationName": "Fetch",
         "variables": {
-            "page": page,
+            "page": page_api,
             "keyword": termo
         }
     }
@@ -135,7 +130,7 @@ def resultado(request):
     fator = APP_ID + str(timestamp) + payload_str + SECRET
     assinatura = hashlib.sha256(fator.encode('utf-8')).hexdigest()
 
-    # Headers com autenticação (também podem ser gerados por gerar_headers)
+    # Headers com autenticação
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'SHA256 Credential={APP_ID},Timestamp={timestamp},Signature={assinatura}'
@@ -146,12 +141,8 @@ def resultado(request):
         response = requests.post(API_URL, headers=headers, data=payload_str)
         data = response.json()
 
-        # Debug no console (opcional)
-        print('API:', data)
-
         # Extrai a lista de produtos da resposta
         produtos = data.get("data", {}).get("productOfferV2", {}).get("nodes", [])
-        print("🔹 Produtos retornados:", len(produtos))
 
         # Constrói lista de dicionários com dados simplificados
         for item in produtos:
@@ -163,11 +154,31 @@ def resultado(request):
             })
 
     except Exception as e:
-        # Loga qualquer erro ocorrido
         print("Erro ao buscar produtos:", e)
 
-    # Renderiza os resultados na tela
-    return render(request, "website_amb/resultado.html", {"produtos": resultados})
+    # Paginação no Django para a lista de resultados (20 produtos por página)
+    itens_por_pagina = 20
+    paginator = Paginator(resultados, itens_por_pagina)
+
+    # Página atual da URL GET (parâmetro "pagina")
+    pagina = request.GET.get('pagina', 1)
+
+    try:
+        produtos_paginados = paginator.page(pagina)
+    except PageNotAnInteger:
+        produtos_paginados = paginator.page(1)
+    except EmptyPage:
+        produtos_paginados = paginator.page(paginator.num_pages)
+
+    contexto = {
+        "produtos": produtos_paginados,
+        "pagina": produtos_paginados.number,
+        "tem_anterior": produtos_paginados.has_previous(),
+        "tem_proxima": produtos_paginados.has_next(),
+        "termo": termo_original,
+    }
+
+    return render(request, "website_amb/resultado.html", contexto)
 
 def sobre(request):
     return render(request, 'website_amb/sobre.html')

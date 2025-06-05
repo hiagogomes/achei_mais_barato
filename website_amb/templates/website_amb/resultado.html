@@ -74,6 +74,44 @@
                 </div>
             </section>
 
+            <nav aria-label="Navegação de páginas" class="d-flex justify-content-center my-4">
+                <ul class="pagination pagination-sm">
+                    {% if tem_anterior %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ termo }}&pagina={{ pagina|add:"-1" }}" aria-label="Página anterior">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="visually-hidden">Anterior</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                        Página {{ pagina }}
+                    </span>
+                    </li>
+
+                    {% if tem_proxima %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ termo }}&pagina={{ pagina|add:"1" }}" aria-label="Próxima página">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="visually-hidden">Próxima</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+
+
         {% else %}
             <p class="alert alert-warning" role="alert">Nenhum produto encontrado.</p>
         {% endif %}
