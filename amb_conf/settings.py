@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-zutosf&_(=ss^n51*h9^^%5elyh^y8&+w736ndm)renybu_jyh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,19 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website_amb',
-    'django-q',
 ]
-
-# Configurações do Django-Q
-Q_CLUSTER = {
-    'name': 'acheimaisbarato',
-    'workers': 4,
-    'retry': 120,
-    'timeout': 60,
-    'queue_limit': 50,
-    'bulk': 10,
-    'orm': 'default',  # usa o banco de dados padrão do Django
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
