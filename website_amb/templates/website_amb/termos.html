@@ -1,0 +1,27 @@
+{% extends 'website_amb/base.html' %}
+{% block titulo_aba %}Termos de Uso - Achei Mais Barato{% endblock %}
+
+{% block conteudo_principal %}
+<section class="container my-5">
+  <h1 class="mb-4">Termos de Uso</h1>
+
+  <p>Bem-vindo ao site <strong>Achei Mais Barato</strong>. Ao acessar este site, você concorda com os seguintes termos e condições:</p>
+
+  <h2 class="mt-4">1. Objetivo do Site</h2>
+  <p>Este site tem como objetivo facilitar a comparação de preços de produtos oferecidos por lojas parceiras, exibindo ofertas atualizadas através de links de afiliados.</p>
+
+  <h2 class="mt-4">2. Uso das Informações</h2>
+  <p>As informações exibidas são obtidas de APIs de terceiros. Não garantimos a precisão, disponibilidade ou atualização dos preços, imagens ou descrições.</p>
+
+  <h2 class="mt-4">3. Responsabilidade</h2>
+  <p>O usuário é responsável por verificar a veracidade das informações antes de efetuar qualquer compra nas lojas anunciadas. O <strong>Achei Mais Barato</strong> não realiza vendas diretas nem é responsável por problemas decorrentes das compras.</p>
+
+  <h2 class="mt-4">4. Propriedade Intelectual</h2>
+  <p>Todo o conteúdo presente neste site é protegido por direitos autorais. É proibida a reprodução sem autorização prévia.</p>
+
+  <h2 class="mt-4">5. Alterações nos Termos</h2>
+  <p>Reservamo-nos o direito de modificar estes termos a qualquer momento, sem aviso prévio.</p>
+
+  <p class="text-muted mt-4">Última atualização: {{ data }}</p>
+</section>
+{% endblock %}
