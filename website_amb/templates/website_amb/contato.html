@@ -1,6 +1,34 @@
+{% extends 'website_amb/base.html' %}
+
 {% block titulo_aba %}Contato - Achei Mais Barato{% endblock %}
 
 {% block conteudo_principal %}
-    <h1>Página em Contrução</h1>
+<main class="container my-5" role="main">
+    <section class="text-center mb-4">
+        <h1 class="h2">Fale Conosco</h1>
+        <p class="text-muted">Envie dúvidas, sugestões ou parcerias. Estamos aqui para te ajudar a economizar!</p>
+    </section>
+
+    <section aria-label="Formulário de contato">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome completo</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="email">Endereço de e-mail</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Seu e-mail" required>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="mensagem">Mensagem</label>
+                <textarea class="form-control" id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Enviar Mensagem</button>
+        </form>
+    </section>
+</main>
 {% endblock %}
-    

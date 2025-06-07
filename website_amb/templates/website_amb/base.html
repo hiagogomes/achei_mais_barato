@@ -1,28 +1,28 @@
-<!-- {% load static %} -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Achei Mais Barato é um buscador de ofertas que te ajuda a pagar menos nas suas compras online.">
-    <meta name="keywords" content="buscador de preços, comparar preços, ofertas online, shopee, promoção, menor preço, amazon">
-    <meta name="author" content="Achei Mais Barato">
-    <meta name="robots" content="index, follow">
+  <!-- SEO Básico -->
+  <meta name="description" content="Achei Mais Barato é um buscador de ofertas que te ajuda a pagar menos nas suas compras online.">
+  <meta name="keywords" content="buscador de preços, comparar preços, ofertas online, shopee, promoção, menor preço, amazon">
+  <meta name="author" content="Achei Mais Barato">
+  <meta name="robots" content="index, follow">
 
-    <!-- Estilos -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="{% static 'website_amb/css/style.css' %}"> -->
 
-    <!-- <link rel="stylesheet" href="{% static 'website_amb/css/style.css' %}"> -->
+  <title>{% block titulo_aba %}Achei Mais Barato - Compare e Economize{% endblock %}</title>
 
-    <!-- Título dinâmico -->
-    <title>{% block titulo_aba %}Achei Mais Barato - Compare e Economize{% endblock %}</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
 
-
-      <style>
     .form-container {
       position: relative;
       width: 100%;
@@ -49,72 +49,99 @@
       border-top-color: #555;
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
-      display: none; /* começa oculto */
+      display: none;
     }
 
     @keyframes spin {
-      to { transform: translateY(-50%) rotate(360deg); }
+      to {
+        transform: translateY(-50%) rotate(360deg);
+      }
     }
+
+    /* Personalização do botão hamburguer */
+.custom-toggler {
+  border-color: #ffffff;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Espaçamento para os itens em colapso */
+.navbar-nav .nav-link {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Separador (hr) somente em telas pequenas */
+@media (max-width: 991.98px) {
+  #navbarConteudo ul {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+}
+
   </style>
 </head>
 
-<body style="font-family: 'Montserrat', sans-serif;">
+<body>
+  <div class="d-flex flex-column min-vh-100">
 
     <!-- Cabeçalho -->
-    {% block cabecalho %}
-        <header class="bg-primary text-white shadow-sm" role="banner">
-            <div class="d-flex justify-content-between align-items-center px-3 py-3">
-                
-                <!-- Logo à esquerda -->
-                <a href="/" class="text-decoration-none text-white h4 text-uppercase ml-2" style="text-decoration: none;  letter-spacing: 1px;">
-                Achei Mais Barato
-                </a>
+    <header class="bg-primary text-white shadow-sm" role="banner">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand font-weight-bold text-uppercase" href="/">Achei Mais Barato</a>
 
-                <!-- Menu à direita -->
-                <nav>
-                    <ul class="navbar-nav d-flex flex-row mr-3">
-                        <li class="nav-item">
-                            <a href="/" class="nav-link text-white pl-3 pb-1 pr-3 pt-1">Início</a>
-                        </li>
+          <!-- Botão do menu hamburguer com estilo personalizado -->
+<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarConteudo"
+  aria-controls="navbarConteudo" aria-expanded="false" aria-label="Alternar navegação">
+  <span class="navbar-toggler-icon"></span>
+</button>
 
-                        <li class="nav-item ml-1">
-                            <a href="{% url 'sobre' %}" class="nav-link text-white pl-3 pb-1 pr-3 pt-1">Sobre</a>
-                        </li>
+<!-- Menu colapsável -->
+<div class="collapse navbar-collapse justify-content-end mt-2" id="navbarConteudo">
+  <ul class="navbar-nav text-right">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/">Início</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'sobre' %}">Sobre</a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'contato' %}">Contato</a>
+    </li> -->
+  </ul>
+</div>
 
-                        <li class="nav-item ml-1">
-                            <a href="{% url 'contato' %}" class="nav-link text-white pl-3 pb-1 pr-3 pt-1">Contato</a>
-                        </li>
-                    </ul>
-                </nav>
-                
-            </div>
-        </header>
-
-    {% endblock %}
-
+        </nav>
+      </div>
+    </header>
 
     <!-- Conteúdo principal -->
-    <main role="main">
-        {% block conteudo_principal %}{% endblock %}
+    <main role="main" class="flex-grow-1 my-4">
+      {% block conteudo_principal %}{% endblock %}
     </main>
 
-    <footer class="bg-light text-center py-3 mt-5 border-top fixed-bottom">
+    <!-- Rodapé -->
+    <footer class="bg-light text-center py-3 border-top fixed-bottom">
       <small>
-        <a href="{% url 'termos' %}" class="text-decoration-none me-3 mr-2">Termos de Uso</a>
-        <a href="{% url 'politica_privacidade' %}" class="text-decoration-none me-3 mr-3">Política de Privacidade</a>
+        <a href="{% url 'termos' %}" class="text-decoration-none mr-3">Termos de Uso</a>
+        <a href="{% url 'politica_privacidade' %}" class="text-decoration-none mr-3">Política de Privacidade</a>
         <a href="{% url 'politica_afiliados' %}" class="text-decoration-none">Política de Afiliados</a>
       </small>
     </footer>
 
+  </div>
 
-    <!-- BootStrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- Google Adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6993782980241444"
-      crossorigin="anonymous"></script>
-
+  <!-- Google Adsense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6993782980241444"
+    crossorigin="anonymous"></script>
 </body>
 </html>
